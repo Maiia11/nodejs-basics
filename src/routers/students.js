@@ -30,7 +30,7 @@ router.get('/', checkRoles(ROLES.TEACHER), ctrlWrapper(getStudentsController));
 
 router.get('/:studentId', checkRoles(ROLES.TEACHER, ROLES.PARENT), isValidId, ctrlWrapper(getStudentByIdController));
 
-router.post('/', checkRoles(ROLES.TEACHER), upload.single('photo'),
+router.post('/', checkRoles(ROLES.TEACHER), upload.single('photo'), validateBody(createStudentSchema),
   ctrlWrapper(createStudentController));
 
 router.delete('/:studentId', checkRoles(ROLES.TEACHER), isValidId, ctrlWrapper(deleteStudentController));
