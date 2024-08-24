@@ -5,6 +5,7 @@ import { parseSortParams } from '../utils/parseSortParams.js';
 import { parseFilterParams } from '../utils/parseFilterParams.js';
 
 
+
 export const getStudentsController = async (req, res) => {
   const { page, perPage } = parsePaginationParams(req.query);
   const { sortBy, sortOrder } = parseSortParams(req.query);
@@ -45,7 +46,14 @@ export const getStudentByIdController = async (req, res, next) => {
 }
 
 export const createStudentController = async (req, res) => {
-  const student = await createStudent(req.body);
+  const studentData = {
+    ...req.body,
+    parentId: req.user._id, // Убедитесь, что parentId добавляется правильно
+  };
+
+  const student = await createStudent(studentData);
+
+
 
   res.status(201).json({
     status: 201,
