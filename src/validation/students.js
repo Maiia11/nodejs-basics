@@ -18,4 +18,5 @@ export const updateStudentSchema = Joi.object({
   gender: Joi.string().valid('male', 'female', 'other'),
   avgMark: Joi.number().min(2).max(12),
   onDuty: Joi.boolean(),
+  photo: Joi.string(),
 });
